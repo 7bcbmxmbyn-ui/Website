@@ -1,0 +1,286 @@
+
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jouw Website — heldere waardepropositie</title>
+  <meta name="description" content="Korte beschrijving van jouw dienst of product. Max ~155 tekens.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🌐</text></svg>">
+  <style>
+    /* --- CSS reset (klein) --- */
+    *,*::before,*::after{box-sizing:border-box}
+    html:focus-within{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;line-height:1.6;color:#0f172a;background:#ffffff}
+    img,picture,svg,video{display:block;max-width:100%;height:auto}
+    input,button,textarea,select{font:inherit}
+    a{color:inherit}
+
+    /* --- Design tokens --- */
+    :root{
+      --bg:#ffffff;
+      --ink:#0f172a;         /* slate-900 */
+      --muted:#475569;       /* slate-600 */
+      --brand:#78797b;       /* blue-600 */
+      --brand-ink:#ffffff;
+      --surface:#f1f5f9;     /* slate-100 */
+      --ring:#93c5fd;        /* blue-300 */
+      --maxw: 64rem;         /* 1024px */
+      --radius: 1.25rem;     /* 20px */
+      --shadow: 0 10px 25px rgba(2,6,23,.08);
+    }
+
+    /* --- Layout helpers --- */
+    .container{width:100%;max-width:var(--maxw);margin-inline:auto;padding:clamp(16px,3vw,32px)}
+    .grid{display:grid;gap:clamp(16px,2.5vw,24px)}
+    .grid-3{grid-template-columns:repeat(1,minmax(0,1fr))}
+    @media (min-width: 768px){.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+    header{position:sticky;top:0;background:rgba(255,255,255,.8);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid #e2e8f0}
+    nav{display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:700;letter-spacing:.2px}
+    .nav-links{display:flex;gap:16px}
+    .nav-links a{padding:8px 10px;border-radius:10px;text-decoration:none}
+    .nav-links a:focus-visible{outline:3px solid var(--ring);outline-offset:2px}
+
+    .card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.card img:hover {
+  transform: scale(1.03);
+}
+
+
+   .hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(32px,6vw,80px) 0;
+  background: linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);
+}
+
+/* Honingraatpatroon */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* donkerder en kleiner patroon => duidelijker */
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='104' viewBox='0 0 120 104' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2394a3b8' stroke-opacity='0.35' stroke-width='1'%3E%3Cpath d='M60 0l60 34v68l-60 34L0 102V34z'/%3E%3Cpath d='M0 34l60 34 60-34M0 102l60 34 60-34M60 68v68'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 160px 138px; /* was 240x208 */
+  opacity: 0.4;                /* was 0.15 */
+  z-index: 0;
+}
+
+
+/* Content boven het patroon houden */
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+    .hero h1{font-size:clamp(28px,5vw,44px);line-height:1.2;margin:0 0 12px 0}
+    .hero p{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:60ch}
+
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;background:var(--brand);color:var(--brand-ink);border:0;text-decoration:none;box-shadow:var(--shadow)}
+    .btn:hover{filter:brightness(1.03)}
+    .btn:active{transform:translateY(1px)}
+    .btn:focus-visible{outline:4px solid var(--ring);outline-offset:2px}
+
+    .card{background:var(--surface);border:1px solid #e2e8f0;border-radius:var(--radius);padding:20px}
+    .card h3{margin:0 0 6px 0}
+    .card p{margin:0;color:var(--muted)}
+
+    .cta{background:#0b1220;color:white;border-radius:var(--radius);padding:clamp(20px,3vw,28px)}
+
+    footer{padding:32px 0;border-top:1px solid #e2e8f0;color:#64748b}
+
+    /* --- Accessibility helpers --- */
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:16px;top:16px;width:auto;height:auto;padding:10px 14px;background:#111827;color:white;border-radius:10px}
+
+    /* Motion respect */
+    @media (prefers-reduced-motion:no-preference){
+      .float-in{animation:floatIn .6s ease-out both}
+      @keyframes floatIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    }
+
+
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.case {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.case img {
+  width: 100%;
+  aspect-ratio: 16 / 9;  /* uniforme thumbnails */
+  object-fit: cover;
+  display: block;
+}
+
+.case h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 12px 16px 0;
+}
+
+.case p {
+  padding: 0 16px 16px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.case:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+  .cases-grid { grid-template-columns: 1fr; }
+}
+
+
+
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Direct naar inhoud</a>
+
+  <header>
+    <div class="container">
+      <nav aria-label="Hoofdnavigatie">
+        <div class="brand">Jager & Buur</div>
+        <div class="nav-links" role="menubar">
+          <a role="menuitem" href="#features">Features</a>
+          <a role="menuitem" href="#cases">Cases</a>
+          <a role="menuitem" href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container grid" style="align-items:center">
+        <div class="float-in">
+          <h1> Big Security, <br> Built for Small Business. <em></em>
+          <p>Our platform gives small companies the same cybersecurity strength as the big players, minus the complexity and the massive invoices.</p>
+          <p style="margin-top:16px">
+            <a class="btn" href="#contact" aria-label="Start now – ga naar contactformulier">
+              <!-- inline icon -->
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              Start now
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="container" aria-labelledby="features-title">
+      <h2 id="features-title"> Why choose us as a partner?</h2>
+      <div class="grid grid-3">
+        <article class="card" aria-labelledby="f1">
+          <h3 id="f1">Fast results</h3>
+          <p>No jargon, no waiting. We get straight to work so you can see real progress right away. Your setup goes live within a week</p>
+        </article>
+        <article class="card" aria-labelledby="f2">
+          <h3 id="f2">Transparent prices</h3>
+          <p>We believe in honesty from the start. Each plan has one transparent price, with no hidden fees or confusing terms. You always know exactly what you’re paying for and what you’ll get.</p>
+        </article>
+        <article class="card" aria-labelledby="f3">
+          <h3 id="f3">On-demand support</h3>
+          <p>You’re never left alone. Our team provides clear guides, quick answers, and real human support whenever you need it — so you can stay focused on running your business.</p>
+        </article>
+      </div>
+    </section>
+
+  <section id="cases" class="container" aria-labelledby="cases-title">
+  <h2 id="cases-title">Voorbeelden / cases</h2>
+
+  <div class="cases-grid">
+    <a href="project1.html" class="case">
+      <img src="images/Een.jpg" alt="Azure dashboard">
+      <h3>Azure Compute VM Dashboard</h3>
+      <p>KPI-overzicht voor virtuele machines en netwerkanalyse.</p>
+    </a>
+
+    <a href="project2.html" class="case">
+      <img src="images/Twee.jpg" alt="Alerts overzicht">
+      <h3>Security Alerts Dashboard</h3>
+      <p>Realtime monitoring van incidenten en bedreigingen.</p>
+    </a>
+
+    <a href="project3.html" class="case">
+      <img src="images/Drie.jpg" alt="Fleet management">
+      <h3>Device Fleet Management</h3>
+      <p>Beheer van endpoints en updates via één portaal.</p>
+    </a>
+
+    <a href="project4.html" class="case">
+      <img src="images/Vier.jpg" alt="Monitoring overzicht">
+      <h3>Cloud Monitoring Tools</h3>
+      <p>Dashboards voor prestaties en uptime.</p>
+    </a>
+  </div>
+</section>
+
+
+    <section id="contact" class="container" aria-labelledby="contact-title">
+      <h2 id="contact-title">Neem contact op</h2>
+      <div class="cta" role="group" aria-label="Contactformulier">
+        <form action="https://formspree.io/f/your-id" method="POST" class="grid" style="gap:12px">
+          <label>
+            <span>Naam</span>
+            <input name="name" type="text" required style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:10px" />
+          </label>
+          <label>
+            <span>E‑mail</span>
+            <input name="email" type="email" required style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:10px" />
+          </label>
+          <label>
+            <span>Bericht</span>
+            <textarea name="message" rows="5" required style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:10px"></textarea>
+          </label>
+          <button class="btn" type="submit">Verstuur</button>
+          <p style="margin:0;color:#cbd5e1;font-size:14px">Deze demo gebruikt Formspree. Vervang de action‑URL door je eigen endpoint.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>© <span id="year"></span> Jager&Buur. Alle rechten voorbehouden.</small>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

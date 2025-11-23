@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mijn ervaring bij Ernst &amp; Young (EY) – IT Risk</title>
+  <meta name="description" content="Mijn 6 maanden scriptiestage bij Ernst & Young (EY) op de afdeling IT Risk: dagelijkse werkzaamheden, scriptie over onboarding en wat ik heb geleerd.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💼</text></svg>">
+  <style>
+    /* --- CSS reset (klein) --- */
+    *,*::before,*::after{box-sizing:border-box}
+    html:focus-within{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;line-height:1.6;color:#0f172a;background:#ffffff}
+    img,picture,svg,video{display:block;max-width:100%;height:auto}
+    input,button,textarea,select{font:inherit}
+    a{color:inherit}
+
+    /* --- Design tokens --- */
+    :root{
+      --bg:#ffffff;
+      --ink:#0f172a;         /* slate-900 */
+      --muted:#475569;       /* slate-600 */
+      --brand:#78797b;       /* blauw/grijs */
+      --brand-ink:#ffffff;
+      --surface:#f1f5f9;     /* slate-100 */
+      --ring:#93c5fd;        /* blue-300 */
+      --maxw: 64rem;         /* 1024px */
+      --radius: 1.25rem;     /* 20px */
+      --shadow: 0 10px 25px rgba(2,6,23,.08);
+    }
+
+    /* --- Layout helpers --- */
+    .container{width:100%;max-width:var(--maxw);margin-inline:auto;padding:clamp(16px,3vw,32px)}
+    .grid{display:grid;gap:clamp(16px,2.5vw,24px)}
+    .grid-3{grid-template-columns:repeat(1,minmax(0,1fr))}
+    @media (min-width: 768px){.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+    header{position:sticky;top:0;background:rgba(255,255,255,.8);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid #e2e8f0;z-index:20}
+    nav{display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:700;letter-spacing:.2px}
+    .nav-links{display:flex;gap:16px}
+    .nav-links a{padding:8px 10px;border-radius:10px;text-decoration:none}
+    .nav-links a:focus-visible{outline:3px solid var(--ring);outline-offset:2px}
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(32px,6vw,80px) 0;
+      background: linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);
+    }
+
+    /* Honingraatpatroon */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='120' height='104' viewBox='0 0 120 104' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2394a3b8' stroke-opacity='0.35' stroke-width='1'%3E%3Cpath d='M60 0l60 34v68l-60 34L0 102V34z'/%3E%3Cpath d='M0 34l60 34 60-34M0 102l60 34 60-34M60 68v68'/%3E%3C/g%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 160px 138px;
+      opacity: 0.4;
+      z-index: 0;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1{font-size:clamp(28px,5vw,44px);line-height:1.2;margin:0 0 12px 0}
+    .hero p{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:60ch}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 18px;
+      border-radius:999px;
+      background:var(--brand);
+      color:var(--brand-ink);
+      border:0;
+      text-decoration:none;
+      box-shadow:var(--shadow);
+      cursor:pointer;
+    }
+    .btn:hover{filter:brightness(1.03)}
+    .btn:active{transform:translateY(1px)}
+    .btn:focus-visible{outline:4px solid var(--ring);outline-offset:2px}
+
+    .card{
+      background:var(--surface);
+      border:1px solid #e2e8f0;
+      border-radius:var(--radius);
+      padding:20px;
+      box-shadow:var(--shadow);
+    }
+    .card h3{margin:0 0 6px 0}
+    .card p{margin:0;color:var(--muted)}
+
+    .cta{
+      background:#0b1220;
+      color:white;
+      border-radius:var(--radius);
+      padding:clamp(20px,3vw,28px);
+      margin-top:32px;
+    }
+    .cta h2{margin-top:0}
+    .cta p{color:#e5e7eb}
+
+    footer{padding:32px 0;border-top:1px solid #e2e8f0;color:#64748b}
+
+    /* --- Accessibility helpers --- */
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:16px;top:16px;width:auto;height:auto;padding:10px 14px;background:#111827;color:white;border-radius:10px}
+
+    /* Motion respect */
+    @media (prefers-reduced-motion:no-preference){
+      .float-in{animation:floatIn .6s ease-out both}
+      @keyframes floatIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    }
+
+    /* Projecten / ervaringen-grid */
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .case {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      padding: 16px 18px;
+    }
+
+    .case h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0 0 4px;
+    }
+
+    .case span {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .case p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .case:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+    }
+
+    @media (max-width: 768px) {
+      .cases-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Direct naar inhoud</a>
+
+  <header>
+    <div class="container">
+      <nav aria-label="Hoofdnavigatie">
+        <div class="brand">Klaas de Jager — EY IT Risk</div>
+        <div class="nav-links" role="menubar">
+          <a role="menuitem" href="#overzicht">Overzicht</a>
+          <a role="menuitem" href="#werk">Werkzaamheden & Onderzoek</a>
+          <a role="menuitem" href="#leerpunten">Wat ik heb geleerd</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="overzicht">
+      <div class="container grid" style="align-items:center">
+        <div class="float-in">
+          <h1>Mijn ervaring bij Ernst &amp; Young (EY)</h1>
+          <p>
+            Zes maanden scriptiestage op de afdeling <strong>IT Risk</strong>, op het snijvlak van technologie,
+            data en assurance. Technology Risk bij EY combineert IT, processen en finance. Voor mij als TBK-student was dit de ideale plek om te zien hoe je risico’s, processen en mensen samenbrengt in één verhaal voor de klant. Mijn rol: ondersteunen, observeren, doorvragen en dat gebruiken als input voor mijn onderzoek naar onboarding.
+          </p>
+          <p style="margin-top:10px">
+            Periode: kwartiel 3 &amp; 4 (2023/2024) · Locatie: EY Amsterdam, Technology Risk.
+          </p>
+          <p style="margin-top:16px">
+            <a class="btn" href="index.html" aria-label="Terug naar de homepage">
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 18l-6-6 6-6"/>
+                <path d="M21 12H9"/>
+              </svg>
+              Terug naar homepage
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WERK BIJ IT RISK -->
+    <section id="werk" class="container" aria-labelledby="werk-title">
+      <h2 id="werk-title">Wat ik deed bij IT Risk</h2>
+      <div class="grid grid-3" style="margin-top:16px">
+        <article class="card">
+          <h3>Dagelijkse ondersteuning in audits</h3>
+          <p>
+            Meedraaien in de <strong>day-to-day werkzaamheden</strong> van IT Risk: controleren van data,
+            voorbereiden en nalopen van bestanden, checken of documentatie en evidence aansluiten
+            op EY-procedures en het werk van de auditteams. Praktisch, detailgericht en sterk
+            procesgedreven.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Werken in een Big Four-omgeving</h3>
+          <p>
+            Ervaren hoe planning, tools (zoals Atlas/Canvas) en strakke procedures samenkomen in
+            grote assurancteams. Leren omgaan met piekdrukte, strakke deadlines en hybride werken,
+            terwijl je kwaliteit en documentatie op niveau houdt.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Meekijken achter de schermen van onboarding</h3>
+          <p>
+            Omdat mijn scriptie over onboarding ging, had ik veel contact met HR, planning,
+            managers en starters. Daardoor kreeg ik inzicht in <strong>hoe nieuwe IT Risk-medewerkers echt
+            landen in de praktijk</strong> – los van hoe het proces op papier is ingericht.
+          </p>
+        </article>
+      </div>
+
+      <div class="cta">
+        <h2>“Hoe kan het onboardingproces worden geoptimaliseerd met als doel de productiviteit van nieuwe assurance-medewerkers te verbeteren?”</h2>
+        <p>
+        <ul>
+          <li>Analyse van het bestaande onboardingproces</li>
+          <li>Interviews met medewerkers om ervaringen op te halen</li>
+          <li>Enquête uitgevoerd voor bredere input</li>
+          <li>Vergelijkend onderzoek naar onboarding bij andere organisaties</li>
+          <li>Theorie gebruikt om bevindingen te structureren</li>
+          <li>Verbeterconcept ontworpen op basis van alle inzichten</li>
+        </ul>
+      </div>
+    </section>
+
+   
+    <!-- LEERPUNTEN -->
+    <section id="leerpunten" class="container" aria-labelledby="leer-title">
+      <h2 id="leer-title">Wat ik heb geleerd tijdens mijn tijd bij EY</h2>
+      <div class="grid grid-3" style="margin-top:16px">
+        <article class="card">
+          <h3>Onderzoek doen in een corporate omgeving</h3>
+          <p>
+            Leren hoe je binnen een grote organisatie interviews regelt, mensen aan tafel krijgt en
+            toch kritisch blijft. Balans vinden tussen diplomatiek communiceren en scherp zijn op
+            data, aannames en conclusies.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Van theorie naar concrete verbeteringen</h3>
+          <p>
+            Modellen als ADKAR, Social Learning en de vier C’s van onboarding gebruiken om echte
+            problemen te duiden: wachttijden, informatiegaten, onboarding die te theoretisch is en
+            niet genoeg meeloopt met de praktijk op de werkvloer.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Hybride werken &amp; eigen verantwoordelijkheid</h3>
+          <p>
+            In een hybride omgeving moet je zelf actief vragen stellen, afspraken plannen en feedback
+            ophalen. Ik leerde proactief te zijn: niet wachten tot iemand iets uitlegt, maar zelf de
+            structuur maken en mensen benaderen.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Omgaan met complexiteit</h3>
+          <p>
+            EY is groot, de processen zijn complex en de onboarding raakt HR, IT, planning en de
+            business. Ik leerde die complexiteit terug te brengen tot een helder verhaal met concrete
+            keuzes en scenario’s.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Werken met data én mensen</h3>
+          <p>
+            Combinatie van enquêteresultaten, interviewquotes en procesbeschrijvingen. Data
+            gebruiken om een punt te maken, maar altijd gekoppeld aan verhalen en ervaringen van
+            de mensen die in het proces werken.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Mijn rol als kritische sparringpartner</h3>
+          <p>
+            Tijdens de stage groeide ik in de rol van “degene die de waarom-vraag stelt”. Niet alles
+            accepteren omdat “het nou eenmaal zo gaat”, maar steeds zoeken naar logica,
+            eenvoud en betere manieren om mensen productief te maken.
+          </p>
+        </article>
+      </div>
+    </section>
+  
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>© <span id="year"></span> Klaas de Jager – Ervaring bij Ernst &amp; Young. Alle rechten voorbehouden.</small>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

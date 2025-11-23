@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="nl" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="meta.title">Klaas de Jager — Portfolio</title>
+  <meta name="description" content="Portfolio van Klaas de Jager: technische bedrijfskunde, management en praktijkgerichte cases.">
+  <link
+    rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🌐</text></svg>"
+  >
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a href="#main" class="skip-link" data-i18n="a11y.skip">Direct naar inhoud</a>
+
+  <header>
+    <div class="container">
+      <nav aria-label="Hoofdnavigatie">
+        <div class="brand">Klaas de Jager</div>
+
+        <div class="nav-links" role="menubar">
+          <a role="menuitem" href="#features" data-i18n="nav.features">Features</a>
+          <a role="menuitem" href="#cases" data-i18n="nav.cases">Cases</a>
+          <a role="menuitem" href="#contact" data-i18n="nav.contact">Contact</a>
+        </div>
+
+        <div class="lang-switch">
+          <a href="#" data-lang="nl" aria-label="Nederlands">🇳🇱</a>
+          <a href="#" data-lang="en" aria-label="English">🇬🇧</a>
+          <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">🌙</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container grid">
+        <div class="float-in">
+          <h1 data-i18n="hero.title">Wie ben ik?<br>Ik ben Klaas.</h1>
+          <p data-i18n="hero.subtitle">
+            Ik ontwikkel mij in het oplossen van praktische problemen en het slimmer maken van processen.
+          </p>
+          <a class="btn" href="#contact" aria-label="Neem contact op" data-i18n="cta.start">Neem contact op!</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="container" aria-labelledby="features-title">
+      <h2 id="features-title" data-i18n="features.title">Wat is mijn achtergrond?</h2>
+      <div class="grid grid-3">
+        <article class="card" aria-labelledby="f1">
+          <h3 id="f1" data-i18n="features.fast.title">Hoger Algemeen Voortgezet Onderwijs</h3>
+          <p data-i18n="features.fast.body">
+            Op het Jac. P. Thijsse College in Castricum heb ik mijn havo afgerond. Mijn profielen waren Economie &amp; Maatschappij en Cultuur &amp; Maatschappij. Extra vakken: Duits, Geschiedenis en Muziek.
+          </p>
+        </article>
+
+        <article class="card" aria-labelledby="f2">
+          <h3 id="f2" data-i18n="features.pricing.title">Engineering: Technische Bedrijfskunde</h3>
+          <p data-i18n="features.pricing.body">
+            Na de havo ben ik doorgestroomd naar het hbo. Aan de Hogeschool van Amsterdam heb ik mijn bachelor in Engineering (Technische Bedrijfskunde) afgerond. Extra vakken: Modelling in Operations en Kleur &amp; Materiaalafwerking. In mijn derde jaar heb ik naast mijn stage bij MSD de minor Ondernemerschap gevolgd.
+          </p>
+        </article>
+
+        <article class="card" aria-labelledby="f3">
+          <h3 id="f3" data-i18n="features.support.title">Pre-master in Management</h3>
+          <p data-i18n="features.support.body">
+            Sinds begin november ben ik klaar met mijn pre-master in Management aan Nyenrode Business University in Amsterdam, afgerond met een gemiddelde van een 7,4. Vanaf januari 2026 start ik met de master. Daar heb ik enorm veel zin in.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="cases" class="container" aria-labelledby="cases-title">
+      <h2 id="cases-title" data-i18n="cases.title">Ervaring</h2>
+
+      <div class="cases-grid">
+        <a href="Ernst.html" class="case">
+          <img src="images/Een1.jpg" alt="Overzicht van een Azure-dashboard">
+          <h3 data-i18n="cases.one.title">Scriptiestage bij Ernst &amp; Young</h3>
+          <p data-i18n="cases.one.body">Ondersteunde het Technology Risk team bij technische controls en schreef een scriptie over het verbeteren van het onboardingproces van de afdeling (Landelijk)</p>
+        </a>
+
+        <a href="MSD.html" class="case">
+          <img src="images/Twee2.jpg" alt="Overzicht van beveiligingsalerts">
+          <h3 data-i18n="cases.two.title">Derdejaars stage bij MSD</h3>
+          <p data-i18n="cases.two.body">Maakte de FTE-inzet binnen Capex-projecten volledig inzichtelijk. Ontwikkelde en verfijnde een Excel/VBA-tool die het planningsproces duidelijker en efficiënter maakte.</p>
+        </a>
+
+        <a href="Hak.html" class="case">
+          <img src="images/Drie3.jpg" alt="Dashboard voor asset- en fleetmanagement">
+          <h3 data-i18n="cases.three.title">Werkvoorbereider bij A. Hak</h3>
+          <p data-i18n="cases.three.body"> Planningen afstemmen, knelpunten bespreken en informatie verduidelijken. Ik was de schakel tussen het kantoor en de ploegen buiten</p>
+        </a>
+
+        <a href="Tuin.html" class="case">
+          <img src="images/Vijf5.jpg" alt="Overzicht van monitoringtools">
+          <h3 data-i18n="cases.four.title">Horecamedewerker bij Tuindiners</h3>
+          <p data-i18n="cases.four.body">Procesoptimalisatie, gastenervaring en operationele performance.</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="contact" class="cta container" aria-labelledby="contact-title">
+      <h2 id="contact-title" data-i18n="contact.title">Neem contact op</h2>
+      <p class="contact-intro">
+        Wil je meer weten, sparren of gewoon even kennismaken? Kies het kanaal dat het beste bij je past.
+      </p>
+
+      <div class="contact-grid">
+        <a href="mailto:Klaas.dejager10@gmail.com" class="contact-card">
+          <h2>E-mail</h2>
+          <p>Klaas.dejager10@gmail.com</p>
+        </a>
+
+        <a href="https://nl.linkedin.com/in/klaas-de-jager" target="_blank" rel="noreferrer" class="contact-card">
+          <h2>LinkedIn</h2>
+          <p>Bekijk mijn profiel en netwerk.</p>
+        </a>
+
+        <a href="https://calendly.com/klaas-dejager10/30min" target="_blank" rel="noreferrer" class="contact-card">
+          <h2>Plan een gesprek</h2>
+          <p>Boek direct een online kennismaking van 30 minuten.</p>
+        </a>
+        
+        <a href="https://www.instagram.com/p/DJ7cAe-I0C-On6YM6O6218XJy4lJe-XNaxnidE0/?img_index=1" target="_blank" rel="noreferrer" class="contact-card">
+          <h2>Ontmoet het team</h2>
+          <p>Love you most</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>
+        &copy; <span id="year"></span> Klaas de Jager —
+        <span data-i18n="footer.rights">Alle rechten voorbehouden.</span>
+      </small>
+    </div>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

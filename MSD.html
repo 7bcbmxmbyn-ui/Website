@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mijn ervaring bij MSD – TechOps Resource Planning</title>
+  <meta name="description" content="Mijn afstudeerstage bij MSD in Haarlem op de afdeling TechOps: ontwikkelen van een resource planning tool voor GMP Capex-projecten, dagelijkse werkzaamheden en wat ik heb geleerd.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💊</text></svg>">
+  <style>
+    /* --- CSS reset (klein) --- */
+    *,*::before,*::after{box-sizing:border-box}
+    html:focus-within{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;line-height:1.6;color:#0f172a;background:#ffffff}
+    img,picture,svg,video{display:block;max-width:100%;height:auto}
+    input,button,textarea,select{font:inherit}
+    a{color:inherit}
+
+    /* --- Design tokens --- */
+    :root{
+      --bg:#ffffff;
+      --ink:#0f172a;         /* slate-900 */
+      --muted:#475569;       /* slate-600 */
+      --brand:#78797b;       /* zelfde neutrale kleur als EY-site */
+      --brand-ink:#ffffff;
+      --surface:#f1f5f9;     /* slate-100 */
+      --ring:#93c5fd;        /* blue-300 */
+      --maxw: 64rem;         /* 1024px */
+      --radius: 1.25rem;     /* 20px */
+      --shadow: 0 10px 25px rgba(2,6,23,.08);
+    }
+
+    /* --- Layout helpers --- */
+    .container{width:100%;max-width:var(--maxw);margin-inline:auto;padding:clamp(16px,3vw,32px)}
+    .grid{display:grid;gap:clamp(16px,2.5vw,24px)}
+    .grid-3{grid-template-columns:repeat(1,minmax(0,1fr))}
+    @media (min-width: 768px){.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+    header{position:sticky;top:0;background:rgba(255,255,255,.8);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid #e2e8f0;z-index:20}
+    nav{display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:700;letter-spacing:.2px}
+    .nav-links{display:flex;gap:16px}
+    .nav-links a{padding:8px 10px;border-radius:10px;text-decoration:none}
+    .nav-links a:focus-visible{outline:3px solid var(--ring);outline-offset:2px}
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(32px,6vw,80px) 0;
+      background: linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);
+    }
+
+    /* Honingraatpatroon */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='120' height='104' viewBox='0 0 120 104' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2394a3b8' stroke-opacity='0.35' stroke-width='1'%3E%3Cpath d='M60 0l60 34v68l-60 34L0 102V34z'/%3E%3Cpath d='M0 34l60 34 60-34M0 102l60 34 60-34M60 68v68'/%3E%3C/g%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 160px 138px;
+      opacity: 0.4;
+      z-index: 0;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1{font-size:clamp(28px,5vw,44px);line-height:1.2;margin:0 0 12px 0}
+    .hero p{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:60ch}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 18px;
+      border-radius:999px;
+      background:var(--brand);
+      color:var(--brand-ink);
+      border:0;
+      text-decoration:none;
+      box-shadow:var(--shadow);
+      cursor:pointer;
+    }
+    .btn:hover{filter:brightness(1.03)}
+    .btn:active{transform:translateY(1px)}
+    .btn:focus-visible{outline:4px solid var(--ring);outline-offset:2px}
+
+    .card{
+      background:var(--surface);
+      border:1px solid #e2e8f0;
+      border-radius:var(--radius);
+      padding:20px;
+      box-shadow:var(--shadow);
+    }
+    .card h3{margin:0 0 6px 0}
+    .card p{margin:0;color:var(--muted)}
+
+    .cta{
+      background:#0b1220;
+      color:white;
+      border-radius:var(--radius);
+      padding:clamp(20px,3vw,28px);
+      margin-top:32px;
+    }
+    .cta h2{margin-top:0}
+    .cta p{color:#e5e7eb}
+
+    footer{padding:32px 0;border-top:1px solid #e2e8f0;color:#64748b}
+
+    /* --- Accessibility helpers --- */
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:16px;top:16px;width:auto;height:auto;padding:10px 14px;background:#111827;color:white;border-radius:10px}
+
+    /* Motion respect */
+    @media (prefers-reduced-motion:no-preference){
+      .float-in{animation:floatIn .6s ease-out both}
+      @keyframes floatIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    }
+
+    /* Projecten / ervaringen-grid */
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .case {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      padding: 16px 18px;
+    }
+
+    .case h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0 0 4px;
+    }
+
+    .case span {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .case p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .case:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+    }
+
+    @media (max-width: 768px) {
+      .cases-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Direct naar inhoud</a>
+
+  <header>
+    <div class="container">
+      <nav aria-label="Hoofdnavigatie">
+        <div class="brand">Klaas de Jager — MSD TechOps</div>
+        <div class="nav-links" role="menubar">
+          <a role="menuitem" href="#overzicht">Overzicht</a>
+          <a role="menuitem" href="#werk">Werkzaamheden &amp; Onderzoek</a>
+          <a role="menuitem" href="#leerpunten">Wat ik heb geleerd</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="overzicht">
+      <div class="container grid" style="align-items:center">
+        <div class="float-in">
+          <h1>Mijn ervaring bij MSD (Merck Sharp &amp; Dohme)</h1>
+          <p>
+            Derde-jaars stage op de afdeling <strong>Technical Operations (TechOps)</strong> in Haarlem, midden in een GMP-omgeving waar
+            vaccins en geneesmiddelen worden verpakt. TechOps is verantwoordelijk voor het <strong>technisch draaiende houden en verbeteren
+            van de verpakkingslijnen</strong> via CAPEX-projecten, onderhoud en optimalisatie. Mijn rol: de juiste mensen, projecten en capaciteit
+            beter in beeld brengen.
+          </p>
+          <p style="margin-top:10px">
+            Periode: kwartiel 3 &amp; 4 (2022/2023) · Locatie: MSD Haarlem, Pharmaceutical Technical Operations (TechOps).
+          </p>
+          <p style="margin-top:16px">
+            <a class="btn" href="index.html" aria-label="Terug naar de homepage">
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 18l-6-6 6-6"/>
+                <path d="M21 12H9"/>
+              </svg>
+              Terug naar homepage
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WERK BIJ MSD / TECHOPS -->
+    <section id="werk" class="container" aria-labelledby="werk-title">
+      <h2 id="werk-title">Wat ik deed bij MSD TechOps</h2>
+      <div class="grid grid-3" style="margin-top:16px">
+        <article class="card">
+          <h3>Meewerken binnen Technical Operations</h3>
+          <p>
+            TechOps zorgt dat <strong>verpakkingslijnen, utilities en installaties</strong> beschikbaar zijn voor productie en continu
+            worden verbeterd via GMP Capex-projecten. Ik draaide mee in de dagelijkse praktijk door projectinformatie te verzamelen,
+            planningen te updaten en samen met engineers te kijken hoe projecten in de fabriek inpasbaar zijn zonder de operatie te
+            verstoren.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Ondersteunen van project- en engineerings­teams</h3>
+          <p>
+            Projectmanagers, project engineers, qualification engineers en TFS hebben allemaal hun eigen projecten en deadlines.
+            Ik hielp hen door <strong>capaciteit en inzetbaarheid inzichtelijk te maken</strong>: wie werkt wanneer aan welk project, waar
+            ontstaan blokkades en welke projecten concurreren om dezelfde mensen. Daarbij zat ik regelmatig aan tafel om planningen
+            door te nemen en scenario’s door te rekenen.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Capaciteit &amp; projecten inzichtelijk maken</h3>
+          <p>
+            Bij 30–35 parallelle Capex-projecten is overzicht cruciaal. Ik heb TechOps ondersteund door <strong>overzichten en
+            rapportages</strong> te bouwen waarmee leidinggevenden sneller konden zien: waar zitten we vol, waar hebben we ruimte en welke
+            keuzes moeten we maken in de projectportfolio. De inzichten uit mijn onderzoek vormden de basis voor een tool die deze
+            overzichten structureel beschikbaar maakt.
+          </p>
+        </article>
+      </div>
+
+      <div class="cta">
+        <h2>“Hoe kan de resourceplanning voor GMP Capex-projecten bij MSD Haarlem worden geoptimaliseerd zodat leidinggevenden beter kunnen sturen op capaciteit en projectportfolio?”</h2>
+        <p>In mijn onderzoek heb ik onder andere:</p>
+        <ul>
+          <li>de IST-situatie van de bestaande Excel-planning geanalyseerd;</li>
+          <li>business needs en eisen opgehaald bij TechOps, TFS en de verschillende engineeringteams;</li>
+          <li>alternatieve systemen vergeleken (ONEPMO, Monday.com en Excel) op o.a. kosten, gebruiksgemak en overzicht;</li>
+          <li>een DMADV-traject doorlopen van probleemdefinitie tot functioneel ontwerp van de tool;</li>
+          <li>de tool gebouwd in Excel/VBA met templates, FTE-overzichten, KPI’s en dashboards;</li>
+          <li>een test- en implementatievoorstel uitgewerkt, inclusief trainingsopzet voor gebruikers.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LEERPUNTEN -->
+    <section id="leerpunten" class="container" aria-labelledby="leer-title">
+      <h2 id="leer-title">Wat ik heb geleerd tijdens mijn tijd bij MSD</h2>
+      <div class="grid grid-3" style="margin-top:16px">
+        <article class="card">
+          <h3>Werken in een GMP-omgeving</h3>
+          <p>
+            Inzicht gekregen in <strong>Good Manufacturing Practices (GMP)</strong>, CAPEX-investeringen en hoe technische projecten direct
+            invloed hebben op kwaliteit, veiligheid en leverbetrouwbaarheid van geneesmiddelen en vaccins.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Van probleem naar helder ontwerp</h3>
+          <p>
+            Het DMADV-model toegepast om gestructureerd van probleemstelling naar ontwerp te gaan,
+            aangevuld met modellen als SWOT, MOSCOW, zwembaandiagrammen en RACI om processen, eisen
+            en verantwoordelijkheden scherp te krijgen.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Tooling, data &amp; VBA-programmeren</h3>
+          <p>
+            In Excel en VBA een complete resourceplanningstool ontwikkeld: automatische berekeningen,
+            logica voor FTE-berekening, templates voor week- en dagplanning en dashboards met KPI’s en
+            FTE-overzichten voor verschillende teams.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Stakeholdermanagement in een technische fabriek</h3>
+          <p>
+            Leren schakelen tussen projectmanagers, engineers, qualification engineers en management:
+            verwachtingen ophalen, tegengestelde wensen vertalen naar één ontwerp en helder communiceren over
+            keuzes en beperkingen van de tool.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Implementatie &amp; verandermanagement</h3>
+          <p>
+            Nagedacht over <strong>data migratie, training en gewenning</strong>: testfases opgezet, impact op productiviteit besproken
+            en een plan gemaakt om de tool stapsgewijs in gebruik te nemen zonder de operatie te blokkeren.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Mijn rol als kritische verbeteraar</h3>
+          <p>
+            Uitgegroeid tot degene die de “waarom doen we dit zo?”-vraag stelt. Niet alles accepteren omdat het nu eenmaal zo gaat,
+            maar processen, tools en aannames bevragen en terugbrengen tot logische, werkbare oplossingen voor de teams op de vloer.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>© <span id="year"></span> Klaas de Jager – Ervaring bij MSD. Alle rechten voorbehouden.</small>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

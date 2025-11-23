@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mijn ervaring bij A. HAK – Werkvoorbereider</title>
+  <meta name="description" content="Mijn 6 maanden als werkvoorbereider bij A. HAK in Purmerend: werkzaamheden in de ondergrondse infra, voorbereiding van projecten en wat ik heb geleerd.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🚧</text></svg>">
+  <style>
+    /* --- CSS reset (klein) --- */
+    *,*::before,*::after{box-sizing:border-box}
+    html:focus-within{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;line-height:1.6;color:#0f172a;background:#ffffff}
+    img,picture,svg,video{display:block;max-width:100%;height:auto}
+    input,button,textarea,select{font:inherit}
+    a{color:inherit}
+
+    /* --- Design tokens --- */
+    :root{
+      --bg:#ffffff;
+      --ink:#0f172a;         /* slate-900 */
+      --muted:#475569;       /* slate-600 */
+      --brand:#78797b;
+      --brand-ink:#ffffff;
+      --surface:#f1f5f9;     /* slate-100 */
+      --ring:#93c5fd;        /* blue-300 */
+      --maxw: 64rem;         /* 1024px */
+      --radius: 1.25rem;     /* 20px */
+      --shadow: 0 10px 25px rgba(2,6,23,.08);
+    }
+
+    /* --- Layout helpers --- */
+    .container{width:100%;max-width:var(--maxw);margin-inline:auto;padding:clamp(16px,3vw,32px)}
+    .grid{display:grid;gap:clamp(16px,2.5vw,24px)}
+    .grid-3{grid-template-columns:repeat(1,minmax(0,1fr))}
+    @media (min-width: 768px){.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+    header{position:sticky;top:0;background:rgba(255,255,255,.8);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid #e2e8f0}
+    nav{display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:700;letter-spacing:.2px}
+    .nav-links{display:flex;gap:16px}
+    .nav-links a{padding:8px 10px;border-radius:10px;text-decoration:none}
+    .nav-links a:focus-visible{outline:3px solid var(--ring);outline-offset:2px}
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(32px,6vw,80px) 0;
+      background: linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);
+    }
+
+    /* Honingraatpatroon */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='120' height='104' viewBox='0 0 120 104' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2394a3b8' stroke-opacity='0.35' stroke-width='1'%3E%3Cpath d='M60 0l60 34v68l-60 34L0 102V34z'/%3E%3Cpath d='M0 34l60 34 60-34M0 102l60 34 60-34M60 68v68'/%3E%3C/g%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 160px 138px;
+      opacity: 0.4;
+      z-index: 0;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1{font-size:clamp(28px,5vw,44px);line-height:1.2;margin:0 0 12px 0}
+    .hero p{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:60ch}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 18px;
+      border-radius:999px;
+      background:var(--brand);
+      color:var(--brand-ink);
+      border:0;
+      text-decoration:none;
+      box-shadow:var(--shadow);
+      cursor:pointer;
+    }
+    .btn:hover{filter:brightness(1.03)}
+    .btn:active{transform:translateY(1px)}
+    .btn:focus-visible{outline:4px solid var(--ring);outline-offset:2px}
+
+    .card{background:var(--surface);border:1px solid #e2e8f0;border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+    .card h3{margin:0 0 6px 0}
+    .card p{margin:0;color:var(--muted)}
+
+    .cta{background:#0b1220;color:white;border-radius:var(--radius);padding:clamp(20px,3vw,28px);margin-top:32px}
+    .cta h2{margin-top:0}
+    .cta p{color:#e5e7eb}
+
+    footer{padding:32px 0;border-top:1px solid #e2e8f0;color:#64748b}
+
+    /* --- Accessibility helpers --- */
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:16px;top:16px;width:auto;height:auto;padding:10px 14px;background:#111827;color:white;border-radius:10px}
+
+    /* Motion respect */
+    @media (prefers-reduced-motion:no-preference){
+      .float-in{animation:floatIn .6s ease-out both}
+      @keyframes floatIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Direct naar inhoud</a>
+
+  <header>
+    <div class="container">
+      <nav aria-label="Hoofdnavigatie">
+        <div class="brand">Klaas de Jager — A. HAK</div>
+        <div class="nav-links" role="menubar">
+          <a role="menuitem" href="#overzicht">Overzicht</a>
+          <a role="menuitem" href="#werk">Werkzaamheden</a>
+          <a role="menuitem" href="#leerpunten">Wat ik heb geleerd</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="overzicht">
+      <div class="container grid" style="align-items:center">
+        <div class="float-in">
+          <h1>Mijn ervaring bij A. HAK in Purmerend</h1>
+          <p>
+            Zes maanden gewerkt als <strong>werkvoorbereider</strong> bij A. HAK in Purmerend, een aannemer in de
+            ondergrondse infrastructuur. Projecten met kabels en leidingen vragen om strakke voorbereiding:
+            tekeningen, vergunningen, materiaal, planning en veiligheid.
+          </p>
+          <p style="margin-top:10px">
+            Periode: 6 maanden · Functie: Werkvoorbereider · Locatie: A. HAK Purmerend.
+          </p>
+          
+          <p style="margin-top:16px">
+            <a class="btn" href="index.html" aria-label="Terug naar de homepage">
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 18l-6-6 6-6"/>
+                <path d="M21 12H9"/>
+              </svg>
+              Terug naar homepage
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WERKZAAMHEDEN -->
+    <section id="werk" class="container" aria-labelledby="werk-title">
+      <h2 id="werk-title">Wat ik deed als werkvoorbereider</h2>
+      <div class="grid grid-3" style="margin-top:16px">
+        <article class="card">
+          <h3>Tekeningen, werkplannen &amp; calculaties</h3>
+          <p>
+            Op basis van aangeleverde ontwerpen en klantinformatie werkte ik <strong>werkplannen en calculaties</strong> uit:
+            hoeveel meters leiding of kabel, waar graafwerk nodig is, welke materialen moeten worden besteld
+            en welke stappen het uitvoeringsteam op locatie gaat nemen.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Afstemming met uitvoerders en monteurs</h3>
+          <p>
+            Veel contact met uitvoerders en monteurs om te zorgen dat de voorbereiding klopt met de praktijk:
+            <strong>planning afstemmen, knelpunten bespreken en informatie verduidelijken</strong>. Zo was ik de schakel tussen kantoor
+            en de ploegen buiten, zodat zij zo min mogelijk verrassingen hadden op de werkplek.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Veiligheid, vergunningen &amp; VCA VOL</h3>
+          <p>
+            Bij werken in de ondergrond draait veel om veiligheid: KLIC-meldingen, werken langs de weg, werken in
+            de buurt van bestaande leidingen en kabels. Tijdens mijn periode bij A. HAK heb ik mijn <strong>VCA VOL</strong> behaald
+            en leerde ik hoe je die veiligheidsprincipes vertaalt naar concrete afspraken in de werkvoorbereiding.
+          </p>
+        </article>
+      </div>
+
+      <div class="cta">
+        <h2>Werken aan ondergrondse infra begint bij voorbereiding</h2>
+        <p>
+          Als werkvoorbereider bij A. HAK leerde ik dat succesvolle projecten beginnen voordat er één meter gegraven is:
+          heldere informatie, goede afstemming en aandacht voor veiligheid maken het verschil tussen “we komen er wel uit”
+          en strak uitgevoerde projecten.
+        </p>
+      </div>
+    </section>
+
+    <!-- LEERPUNTEN -->
+    <section id="leerpunten" class="container" aria-labelledby="leer-title">
+      <h2 id="leer-title">Wat ik heb geleerd tijdens mijn tijd bij A. HAK</h2>
+      <div class="grid grid-3" style="margin-top:16px">
+        <article class="card">
+          <h3>Structuur aanbrengen in veel details</h3>
+          <p>
+            Projecten in de ondergrondse infra hebben veel bewegende delen: tekeningen, nutsbedrijven, bewoners,
+            materialen, planning. Ik leerde informatie te structureren zodat uitvoerders snel zien: wat, waar, wanneer
+            en met welke randvoorwaarden.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Communicatie tussen kantoor en buiten</h3>
+          <p>
+            Oefening in helder communiceren met uitvoerders, monteurs en soms externe partijen. Niet alleen mailen,
+            maar ook bellen, doorvragen en afspraken concreet maken zodat misverstanden in het veld worden voorkomen.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Veiligheidsbewustzijn &amp; VCA VOL</h3>
+          <p>
+            Met het behalen van <strong>VCA VOL</strong> is mijn blik op risico’s scherper geworden: van persoonlijke
+            beschermingsmiddelen tot werkvergunningen en het inschatten van situaties langs de weg of bij bestaande
+            kabel- en leidingtracés.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Planning &amp; prioriteiten</h3>
+          <p>
+            Leren omgaan met meerdere projecten tegelijk: prioriteiten stellen, inschatten welke informatie eerst nodig is,
+            en schakelen als omstandigheden veranderen (weer, leveringen, wijzigingen vanuit de opdrachtgever).
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Verantwoordelijkheid nemen</h3>
+          <p>
+            De kwaliteit van de voorbereiding heeft directe impact op de uitvoering. Ik merkte hoe belangrijk het is om
+            eigenaarschap te nemen over je werk: fouten voorkomen, dingen dubbelchecken en tijdig signaleren als iets niet klopt.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Werken in een projectorganisatie</h3>
+          <p>
+            Inzicht gekregen in hoe een <strong>aannemer in de infra</strong> is georganiseerd: rol van werkvoorbereiding, uitvoering,
+            projectleiding en management, en hoe je als werkvoorbereider de schakel bent tussen die verschillende lagen.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>© <span id="year"></span> Klaas de Jager – Ervaring bij A. HAK. Alle rechten voorbehouden.</small>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
